@@ -8,11 +8,32 @@ public class GameStoreTest {
     @Test
     public void shouldAddGame() {
 
-        GameStore store = new GameStore();
-        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+//        GameStore store = new GameStore();
+//        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+//        Game game1 = store.publishGame("Нетология Баттл Онлайн2", "Аркады2");
+//        boolean containsGame = store.containsGame(game1);
 
-        assertTrue(store.containsGame(game));
+        GameStore store1 = new GameStore();
+        Game game11 = store1.publishGame("Нетология Баттл Онлайн", "Аркады");
+        Game game122 = store1.publishGame("Нетология Баттл Онлайн2", "Аркады2");
+        boolean containsGame = store1.containsGame(game11);
+        assertTrue(store1.containsGame(game122));
     }
 
-    // другие ваши тесты
+    @Test
+    public void shouldPlayTime() {
+
+        GameStore store = new GameStore();
+        Player player = new Player("Petya");
+
+        Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
+        Game game1 = store.publishGame("Нетология Баттл Онлайн2", "Аркады2");
+        store.addPlayTime("Petya", 1);
+        store.addPlayTime("Vasya", 1);
+        store.addPlayTime("Anna", 1);
+        store.getMostPlayer();
+
+    }
+
+
 }

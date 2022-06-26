@@ -104,8 +104,8 @@ public class PlayerTest {
 
         Player player = new Player("Petya");
         player.installGame(game);
-        // player.play(game, -1);
 
+        
         assertThrows(Exception.class, () -> {
             player.play(game, -1);
         });

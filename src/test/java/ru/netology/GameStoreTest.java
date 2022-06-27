@@ -30,10 +30,11 @@ public class GameStoreTest {
         store.addPlayTime("Vasya", 1);
         store.addPlayTime("Anna", 1);
 
-        String expected = store.getMostPlayer();
+        String[] expected = store.getMostPlayer();
         String actual = "Petya";
         assertEquals(expected, actual);
     }
+
 
         @Test
         public void shouldSumTimePetya() {
@@ -47,7 +48,7 @@ public class GameStoreTest {
         store1.addPlayTime("Petya", 4);
         store1.getMostPlayer();
 
-        String actual = store1.getMostPlayer();
+        String[] actual = store1.getMostPlayer();
         String expected = "Petya";
 
         assertEquals(expected, actual);

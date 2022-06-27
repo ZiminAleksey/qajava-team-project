@@ -37,8 +37,9 @@ public class PlayerTest {
         player.play(game, 3);
         player.play(game1, 2);
         player.play(game3, 1);
+        player.play(game1, 2);
 
-        int expected = 5;
+        int expected = 7;
         int actual = player.sumGenre("BattleRoyale");
         assertEquals(expected, actual);
     }
@@ -107,7 +108,7 @@ public class PlayerTest {
         Player player = new Player("Petya");
         player.installGame(game);
 
-        
+
         assertThrows(Exception.class, () -> {
             player.play(game, -1);
         });

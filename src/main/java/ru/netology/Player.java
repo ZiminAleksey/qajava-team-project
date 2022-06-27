@@ -32,8 +32,9 @@ public class Player {
     если игра не была установлена, то надо выкидывать RuntimeException */
     public int play(Game game, int hours) {
         game.getStore().addPlayTime(name, hours);
+        int timeGenre = playedTime.getOrDefault(game, hours);
         if (playedTime.containsKey(game)) {
-            playedTime.put(game, playedTime.get(game));
+            playedTime.put(game, timeGenre + hours);
         } else {
             playedTime.put(game, hours);
         }

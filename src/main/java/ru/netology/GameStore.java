@@ -44,8 +44,11 @@ public class GameStore {
      * суммироваться с прошлым значением для этого игрока
      */
     public void addPlayTime(String playerName, int hours) {
+        if (hours <= 0) {
+            throw new RuntimeException();
+        }
         if (playedTime.containsKey(playerName)) {
-            playedTime.put(playerName, playedTime.get(playerName));
+            playedTime.put(playerName, playedTime.get(playerName) + hours);
         } else {
             playedTime.put(playerName, hours);
         }
@@ -62,8 +65,10 @@ public class GameStore {
             int playerTime = playedTime.get(playerName);
             if (playerTime > mostTime) {
                 mostTime = playerTime;
+
             }
-        }if (mostTime == 0) {
+        }
+        if (mostTime == 0) {
             return null;
         } else {
             for (String playerName : playedTime.keySet()) {

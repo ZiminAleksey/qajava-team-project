@@ -37,6 +37,9 @@ public class Player {
      * если игра не была установлена, то надо выкидывать RuntimeException
      */
     public int play(Game game, int hours) {
+        if (playedTime.get(game) == null) {
+            throw new RuntimeException("Element with game: " + game.getTitle() + " not found");
+        }
         game.getStore().addPlayTime(name, hours);
         int timeGenre = playedTime.getOrDefault(game, hours);
         if (playedTime.containsKey(game)) {

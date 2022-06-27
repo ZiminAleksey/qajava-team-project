@@ -48,11 +48,19 @@ public class PlayerTest {
     public void shouldThrowRunTimeException() {
         GameStore store = new GameStore();
         Game game = store.publishGame("PUBG", "BattleRoyale");
-        Game game1 = store.publishGame("Fortnite", "BattleRoyale");
+        Game game2 = store.publishGame("Fortnite", "BattleRoyale");
         Game game3 = store.publishGame("Нетология Баттл Онлайн", "Аркады");
 
         Player player = new Player("Petya");
+        Player player2 = new Player("Anton");
         player.installGame(game);
+        player.installGame(game2);
+        player2.installGame(game);
+        player2.installGame(game2);
+        player.play(game, 1);
+        player.play(game, 3);
+        player2.play(game, 2);
+        player2.play(game2, 4);
 
 
         assertThrows(RuntimeException.class, () -> {

@@ -2,12 +2,11 @@ package ru.netology;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 
 public class GameStoreTest {
-
-    GameStore storeSomePlayers = new GameStore();
 
 
     @Test
@@ -16,7 +15,6 @@ public class GameStoreTest {
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
         Game game1 = store.publishGame("Нетология Баттл Онлайн2", "Аркады2");
-        boolean containsGame = store.containsGame(game1);
 
         assertTrue(store.containsGame(game1));
     }
@@ -71,6 +69,27 @@ public class GameStoreTest {
         int expected = 9;
 
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFalseContainsGame() {
+        GameStore store = new GameStore();
+        GameStore store1 = new GameStore();
+
+        Game game1 = store.publishGame("Уличный стрит", "Гонки");
+        Game game2 = store1.publishGame("Сматываемся от полицейских", "Гонки");
+
+        assertFalse(store.containsGame(game2));
+    }
+
+    @Test
+    public void addDoubleGames() {
+        GameStore store = new GameStore();
+
+        Game game1 = store.publishGame("Уличный стрит", "Гонки");
+        assertThrows(RuntimeException.class, () -> {
+            store.publishGame("Уличный стрит", "Гонки");
+        });
     }
 
 }

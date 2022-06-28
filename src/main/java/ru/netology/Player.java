@@ -2,6 +2,7 @@ package ru.netology;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class Player {
     private String name;
@@ -26,7 +27,7 @@ public class Player {
      * если игра уже была, никаких изменений происходить не должно
      */
     public void installGame(Game game) {
-        playedTime.put(game, 0);
+        playedTime.putIfAbsent(game, 0);
     }
 
     /**
@@ -39,6 +40,9 @@ public class Player {
     public int play(Game game, int hours) {
         if (playedTime.get(game) == null) {
             throw new RuntimeException("Element with game: " + game.getTitle() + " not found");
+        }
+        if (hours <= 0) {
+            throw new RuntimeException("Quantity hours " + "can't be negative");
         }
         game.getStore().addPlayTime(name, hours);
         int timeGenre = playedTime.getOrDefault(game, hours);
@@ -70,7 +74,16 @@ public class Player {
      * Метод принимает жанр и возвращает игру этого жанра, в которую играли больше всего
      * Если в игры этого жанра не играли, возвращается null
      */
-    public Game mostPlayerByGenre(String genre) {
-        return null;
+    public String mostPlayerByGenre(String genre) {
+        int mostGenre = 0;
+        String bestGenre = null;
+        for (Game game : playedTime.keySet()) {
+            int genreTime = playedTime.get(game);
+            if (game.getGenre().equals(genre) && genreTime > mostGenre) {
+                mostGenre = genreTime;
+                bestGenre = game.getTitle();
+            }
+        }
+        return bestGenre;
     }
 }

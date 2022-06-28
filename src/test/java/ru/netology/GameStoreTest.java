@@ -1,10 +1,14 @@
 package ru.netology;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
 
 public class GameStoreTest {
+
+    GameStore storeSomePlayers = new GameStore();
+
 
     @Test
     public void shouldAddGame() {
@@ -34,8 +38,8 @@ public class GameStoreTest {
     }
 
 
-        @Test
-        public void shouldSumTimePetya() {
+    @Test
+    public void shouldSumTimePetya() {
         GameStore store1 = new GameStore();
 
         Game game3 = store1.publishGame("Уличный стрит", "Гонки");
@@ -69,5 +73,5 @@ public class GameStoreTest {
         assertEquals(expected, actual);
     }
 
-
 }
+

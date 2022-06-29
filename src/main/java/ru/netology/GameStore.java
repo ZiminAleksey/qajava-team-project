@@ -21,6 +21,9 @@ public class GameStore {
      */
     public Game publishGame(String title, String genre) {
         Game game = new Game(title, genre, this);
+        if (games.contains(game)) {
+            throw new RuntimeException("Game" + title + "already published");
+        }
         games.add(game);
         return game;
     }
@@ -44,10 +47,9 @@ public class GameStore {
      * суммироваться с прошлым значением для этого игрока
      */
     public void addPlayTime(String playerName, int hours) {
-        int timePlayer = playedTime.getOrDefault(playerName, hours);
-//        if (hours <= 0) {
-//            throw new RuntimeException();
-//        }
+        if (hours < 0) {
+            throw new RuntimeException();
+        }
         if (playedTime.containsKey(playerName)) {
             playedTime.put(playerName, playedTime.get(playerName) + hours);
         } else {

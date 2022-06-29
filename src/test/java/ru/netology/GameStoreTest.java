@@ -14,9 +14,11 @@ public class GameStoreTest {
 
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
-        Game game1 = store.publishGame("Нетология Баттл Онлайн2", "Аркады2");
+        Game game1 = store.publishGame("Cup Head", "Платформер");
+        Game game2 = store.publishGame("Cup Head", "Платформер");
 
-        assertTrue(store.containsGame(game1));
+
+        assertTrue(store.containsGame(game2));
     }
 
     @Test
@@ -90,6 +92,26 @@ public class GameStoreTest {
         assertThrows(RuntimeException.class, () -> {
             store.publishGame("Уличный стрит", "Гонки");
         });
+    }
+
+    @Test
+    public void addNegativePlayTime() {
+        GameStore store = new GameStore();
+
+        Game game1 = store.publishGame("Уличный стрит", "Гонки");
+        Game game2 = store.publishGame("Сматываемся от полицейских", "Гонки");
+        Game game3 = store.publishGame("Cup Head", "Платформер");
+
+        store.addPlayTime("Petya", 3);
+        store.addPlayTime("Anton", 1);
+        store.addPlayTime("Lexx", 5);
+        store.addPlayTime("Petya", -4);
+        store.getMostPlayer();
+
+        String actual = store.getMostPlayer();
+        String expected = "Petya";
+
+        assertEquals(expected, actual);
     }
 
 }

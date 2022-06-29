@@ -105,12 +105,35 @@ public class GameStoreTest {
         store.addPlayTime("Petya", 3);
         store.addPlayTime("Anton", 1);
         store.addPlayTime("Lexx", 5);
-        store.addPlayTime("Petya", -4);
         store.getMostPlayer();
 
-        String actual = store.getMostPlayer();
-        String expected = "Petya";
+        assertThrows(RuntimeException.class, () -> {
+            store.addPlayTime("Petya", -4);
+        });
 
+    }
+
+    @Test
+    public void shouldEmptyMostPlayer() {
+
+        GameStore store = new GameStore();
+
+        store.addPlayTime("Petya", 0);
+        store.addPlayTime("Vasya", 0);
+        store.addPlayTime("Anna", 0);
+
+        String expected = store.getMostPlayer();
+        String actual = null;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldEmptyPlayedTime() {
+
+        GameStore store = new GameStore();
+
+        int expected = store.getSumPlayedTime();
+        int actual = 0;
         assertEquals(expected, actual);
     }
 

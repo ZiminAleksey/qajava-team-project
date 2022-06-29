@@ -22,7 +22,7 @@ public class GameStore {
     public Game publishGame(String title, String genre) {
         Game game = new Game(title, genre, this);
         if (games.contains(game)) {
-            throw new RuntimeException("Game" + title + "already published");
+            throw new RuntimeException("Game " + title + " already published");
         }
         games.add(game);
         return game;
@@ -48,7 +48,7 @@ public class GameStore {
      */
     public void addPlayTime(String playerName, int hours) {
         if (hours < 0) {
-            throw new RuntimeException();
+            throw new RuntimeException("Quantity " + hours + " can't be negative");
         }
         if (playedTime.containsKey(playerName)) {
             playedTime.put(playerName, playedTime.get(playerName) + hours);
@@ -95,7 +95,7 @@ public class GameStore {
         int sum = 0;
         ArrayList<Integer> playedHours = new ArrayList<>(playedTime.values());
         for (Integer hours : playedHours) {
-            sum +=hours;
+            sum += hours;
         }
         return sum;
     }

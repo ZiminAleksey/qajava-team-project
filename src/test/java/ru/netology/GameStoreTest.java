@@ -15,10 +15,10 @@ public class GameStoreTest {
         GameStore store = new GameStore();
         Game game = store.publishGame("Нетология Баттл Онлайн", "Аркады");
         Game game1 = store.publishGame("Cup Head", "Платформер");
-        Game game2 = store.publishGame("Cup Head", "Платформер");
+//        Game game2 = store.publishGame("Cup Head", "Платформер");
 
 
-        assertTrue(store.containsGame(game2));
+        assertTrue(store.containsGame(game1));
     }
 
     @Test
